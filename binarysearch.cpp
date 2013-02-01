@@ -34,14 +34,38 @@ void merge( int a[], int l, int mid, int r)
               }
        }
 }
+
+int bs(int a[],int n, int num)
+{
+    mergesort(a,0,n-1);
+    int check=0;
+    int l=0,r=n-1,mid,br=0;
+    for (;;)
+    {
+        if(r-l==1) br=1;
+        mid=(l+r)/2;
+
+        if (num>a[mid]) l=mid;
+        else if(num<a[mid]) r=mid;
+        else
+        {
+             check =1;
+             break;
+        }
+        if(br==1) break;
+    }
+    return check;
+}
 int main()
 {
     int n;
     cin>>n;
     int a[n];
     for ( int i=0;i<n;i++) cin>>a[i];
-    mergesort(a,0,n-1);
-    cout<<endl;
-    for ( int i=0;i<n;i++) cout<<a[i]<<endl;
-   // system("pause");
+    int num;
+    cin>>num;
+    int ans=bs(a,n,num);
+    if ( ans==0) cout<<"Number doesn't exist in the array\n";
+    else cout<<"Number exists in the array\n";
+ //   system("pause");
 }
